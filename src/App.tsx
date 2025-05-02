@@ -68,7 +68,8 @@ function App() {
           <h1 className='caption'>Число ПИ</h1>
             <div className="content">
               <TextField
-                placeholder={'Введите последовательность'}
+                label="Введите последовательность"
+                type="number"
                 value={input}
                 color={"secondary"}
                 variant={'outlined'}
