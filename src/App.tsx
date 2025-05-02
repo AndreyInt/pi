@@ -1,9 +1,10 @@
-import {useState} from 'react'
+import React, {useState} from 'react';
+
+import {TextField} from "@mui/material";
 
 import piDigits from './assets/pi.txt?raw';
 
 import './App.css';
-import {TextField} from "@mui/material";
 
 function sumDigitsUntilIndex(endIndex: number): number {
     if (endIndex < 0 || endIndex > piDigits.length) {
@@ -22,17 +23,23 @@ function sumDigitsUntilIndex(endIndex: number): number {
 }
 
 function App() {
-    const [index, setIndex] = useState<number>(null);
-    const [sum, setSum] = useState<number>(0);
+    const [index, setIndex] = useState<number>();
+    const [sum, setSum] = useState<number>();
     const [input, setInput] = useState("");
     const [hasError, setHasError] = useState(false);
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            calculate();
+        }
+    };
 
     const calculate = () => {
         const idx = (piDigits as string).indexOf(input);
         //
         if(idx >= 0) {
             setHasError(false);
-            setIndex(idx);
+            setIndex(idx + 1);
             setSum(sumDigitsUntilIndex(idx));
 
         } else {
@@ -43,11 +50,15 @@ function App() {
     const renderIndex = () => {
         if(hasError) return <span style={{color: "red"}}>Ошибка, последовательность не найдена</span>
         //
-        return <span style={{color: "green"}}>{index + 1}</span>;
+        if(!index) return null;
+        //
+        return <span style={{color: "green"}}>{index}</span>;
     }
 
     const renderSum = () => {
         if(hasError) return <span style={{color: "red"}}>Ошибка, последовательность не найдена</span>
+        //
+        if(!index) return null;
         //
         return <span style={{color: "green"}}>{sum}</span>;
     }
@@ -62,6 +73,7 @@ function App() {
                 color={"secondary"}
                 variant={'outlined'}
                 onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
               />
               <button
                   onClick={calculate}
