@@ -1,0 +1,30 @@
+.pi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.caption {
+  margin: 24px 0 16px;
+
+}
+
+.content {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.disabled:hover {
+  border-color: transparent !important;
+  cursor: default;
+}
+
+div {
+  color: #1a1e25;
+}
