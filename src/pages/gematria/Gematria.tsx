@@ -30,6 +30,7 @@ export const Gematria = memo(() => {
         }
     };
     //
+    console.log('input', input)
     return (
         <div className={styles['gematria']}>
             <h1 className={styles["gematria__caption"]}>Гематрия</h1>
@@ -49,7 +50,7 @@ export const Gematria = memo(() => {
                 />
                 <button
                     disabled={!input}
-                    className={classNames(!input && styles["pi__disabled"])}
+                    className={classNames(!input && styles["gematria__disabled"])}
                     onClick={calculate}
                 >
                     Посчитать
