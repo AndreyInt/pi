@@ -1,4 +1,4 @@
-import {memo, useEffect, useState} from "react";
+import {memo, useCallback, useEffect, useState} from "react";
 
 import classNames from "classnames";
 import {TextField} from "@mui/material";
@@ -12,23 +12,23 @@ export const Gematria = memo(() => {
     const [sum, setSum] = useState<number>();
     const [input, setInput] = useState<string>("");
     //
-    const calculate = () => {
+    const calculate = useCallback(() => {
         setSum(sumOfLetters(input));
-    }
-    //
-    const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === 'Enter') {
-            calculate();
-        }
-    };
+    }, [setSum, input]);
     //
     useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Enter') {
+                calculate();
+            }
+        };
+        //
         window.addEventListener("keydown", handleKeyDown);
         //
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
         }
-    }, [handleKeyDown])
+    }, [calculate])
     //
     return (
         <div className={styles['gematria']}>
