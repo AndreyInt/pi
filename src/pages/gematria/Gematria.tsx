@@ -16,21 +16,20 @@ export const Gematria = memo(() => {
         setSum(sumOfLetters(input));
     }
     //
-    useEffect(() => {
-        window.addEventListener("keydown", handleKeyDown);
-        //
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown);
-        }
-    })
-    //
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'Enter') {
             calculate();
         }
     };
     //
-    console.log('input', input)
+    useEffect(() => {
+        window.addEventListener("keydown", handleKeyDown);
+        //
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        }
+    }, [handleKeyDown])
+    //
     return (
         <div className={styles['gematria']}>
             <h1 className={styles["gematria__caption"]}>Гематрия</h1>
